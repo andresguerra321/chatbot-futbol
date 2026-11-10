@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "opiniones": [
+    {
+      "id": "e32c622a-7363-4f02-a3e7-53181108d858",
+      "fecha_utc": "2026-11-06T15:30:00+00:00",
+      "jugador_id": "j001",
+      "jugador_nombre": "Lionel Messi",
+      "opinion_original": "Su visión de juego y precisión en los pases son extraordinarias.",
+      "sentimiento": "positivo",
+      "razon": "Expresa admiración clara por sus habilidades técnicas y visión de juego.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "a11d441f-8291-4e78-b123-0192837465aa",
+      "fecha_utc": "2026-11-06T16:15:00+00:00",
+      "jugador_id": "j001",
+      "jugador_nombre": "Lionel Messi",
+      "opinion_original": "En los momentos de máxima presión a veces camina la cancha y se desconecta.",
+      "sentimiento": "negativo",
+      "razon": "Critica su actitud y presunta falta de intensidad defensiva en partidos de alta tensión.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "f55c8899-1234-4aaa-bbbb-987654321011",
+      "fecha_utc": "2026-11-06T17:00:00+00:00",
+      "jugador_id": "j001",
+      "jugador_nombre": "Lionel Messi",
+      "opinion_original": "Es un futbolista argentino que juega como delantero o mediapunta.",
+      "sentimiento": "neutro",
+      "razon": "Se limita a enunciar su nacionalidad y posición deportiva sin emitir valoraciones.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "b22e5520-9912-4c89-a234-123456789abc",
+      "fecha_utc": "2026-11-07T10:00:00+00:00",
+      "jugador_id": "j002",
+      "jugador_nombre": "Cristiano Ronaldo",
+      "opinion_original": "Su disciplina y capacidad goleadora a lo largo de los años son incomparables.",
+      "sentimiento": "positivo",
+      "razon": "Elogia fuertemente su ética de trabajo, longevidad y récord goleador.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "c33f6631-0123-4d90-b345-234567890bcd",
+      "fecha_utc": "2026-11-07T11:20:00+00:00",
+      "jugador_id": "j002",
+      "jugador_nombre": "Cristiano Ronaldo",
+      "opinion_original": "Su excesivo individualismo y quejas constantes perjudican el juego colectivo del equipo.",
+      "sentimiento": "negativo",
+      "razon": "Cuestiona su impacto en el trabajo en equipo y su actitud hacia los compañeros.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "d44a7742-1234-4ea1-c456-345678901cde",
+      "fecha_utc": "2026-11-07T12:45:00+00:00",
+      "jugador_id": "j002",
+      "jugador_nombre": "Cristiano Ronaldo",
+      "opinion_original": "Es un goleador implacable y decisivo, pero su temperamento en el campo a veces genera fricción con sus compañeros.",
+      "sentimiento": "mixto",
+      "razon": "Combina admiración por su letalidad goleadora con reparos sobre su temperamento en cancha.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "e55b8853-2345-4fb2-d567-456789012def",
+      "fecha_utc": "2026-11-08T09:10:00+00:00",
+      "jugador_id": "j012",
+      "jugador_nombre": "James Rodríguez",
+      "opinion_original": "Tiene una zurda mágica y una pegada de media distancia de clase mundial.",
+      "sentimiento": "positivo",
+      "razon": "Destaca con entusiasmo su precisión técnica y capacidad de disparo.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "f66c9964-3456-40c3-e678-567890123ef0",
+      "fecha_utc": "2026-11-08T10:30:00+00:00",
+      "jugador_id": "j012",
+      "jugador_nombre": "James Rodríguez",
+      "opinion_original": "Qué constancia tan admirable: juega un partido bueno cada seis meses.",
+      "sentimiento": "negativo",
+      "razon": "Aplica ironía evidente para censurar su falta de regularidad y compromiso competitivo.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "a77d0075-4567-41d4-f789-678901234f01",
+      "fecha_utc": "2026-11-08T14:00:00+00:00",
+      "jugador_id": "j012",
+      "jugador_nombre": "James Rodríguez",
+      "opinion_original": "Posee una visión y talento excepcionales, pero su falta de despliegue físico le resta protagonismo en el fútbol actual.",
+      "sentimiento": "mixto",
+      "razon": "Reconoce su calidad técnica y talento natural, pero critica su ritmo e intensidad física.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "b88e1186-5678-42e5-089a-789012345012",
+      "fecha_utc": "2026-11-09T08:00:00+00:00",
+      "jugador_id": "j013",
+      "jugador_nombre": "Luis Díaz",
+      "opinion_original": "Su desequilibrio en el uno contra uno y su velocidad constante desgastan a cualquier defensa.",
+      "sentimiento": "positivo",
+      "razon": "Elogia su capacidad de regate, velocidad y constante peligro ofensivo.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "c99f2297-6789-43f6-19ab-890123456123",
+      "fecha_utc": "2026-11-09T09:30:00+00:00",
+      "jugador_id": "j013",
+      "jugador_nombre": "Luis Díaz",
+      "opinion_original": "Juega como extremo izquierdo en la selección Colombia.",
+      "sentimiento": "neutro",
+      "razon": "Aporta un dato descriptivo sobre su posición en el campo sin valoración positiva ni negativa.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "d00a3308-789a-4407-2abc-901234567234",
+      "fecha_utc": "2026-11-09T11:00:00+00:00",
+      "jugador_id": "j013",
+      "jugador_nombre": "Luis Díaz",
+      "opinion_original": "Su entrega y dinamismo son incansables durante los noventa minutos, aunque a veces le falta serenidad para definir en el área rival.",
+      "sentimiento": "mixto",
+      "razon": "Pondera positivamente su esfuerzo e intensidad física, pero señala deficiencias en la toma de decisiones al definir.",
+      "modelo": "llama-3.3-70b-versatile",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "255c1eff-4798-47a9-abac-10fcc772a61f",
+      "fecha_utc": "2026-11-10T01:39:08.409987+00:00",
+      "jugador_id": "j001",
+      "jugador_nombre": "Lionel Messi",
+      "opinion_original": "cr7 mejor que messi",
+      "sentimiento": "negativo",
+      "razon": "El aficionado declara que Cristiano Ronaldo es mejor que Messi, expresando una valoración desfavorable hacia Messi.",
+      "modelo": "openai/gpt-oss-120b",
+      "version_prompt": "1.0"
+    },
+    {
+      "id": "d136af3f-00ed-4db7-a0dd-db3c8cdbe9dc",
+      "fecha_utc": "2026-11-10T01:39:32.320305+00:00",
+      "jugador_id": "j001",
+      "jugador_nombre": "Lionel Messi",
+      "opinion_original": "no me gusta messi",
+      "sentimiento": "negativo",
+      "razon": "El aficionado expresa desagrado explícito hacia Messi, indicando una valoración negativa sin matices.",
+      "modelo": "openai/gpt-oss-120b",
+      "version_prompt": "1.0"
+    }
+  ]
+}

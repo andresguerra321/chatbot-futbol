@@ -1,0 +1,21 @@
+# Entorno virtual
+venv/
+.venv/
+env/
+
+# Variables de entorno confidenciales
+.env
+
+# Python bytecode y caché
+__pycache__/
+*.py[cod]
+*$py.class
+*.tmp
+
+# Archivos de Streamlit
+.streamlit/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+

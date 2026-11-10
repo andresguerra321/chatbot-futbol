@@ -279,7 +279,7 @@ def main():
             return
 
         # Filtros de consulta
-        col_f1, col_f2 = st.columns(2)
+        col_f1, col_f2, col_f3 = st.columns([2, 2, 1])
 
         with col_f1:
             opciones_filtro_jugador = ["Todos"] + [f"{j['nombre']} ({j['id']})" for j in catalogo_jugadores]
@@ -294,6 +294,12 @@ def main():
             seleccion_f_sentimiento = st.selectbox("Filtrar por sentimiento:", opciones_filtro_sentimiento)
             sentimiento_filtro = None if seleccion_f_sentimiento == "Todos" else seleccion_f_sentimiento
 
+        with col_f3:
+            st.write("")
+            st.write("")
+            if st.button("🔄 Actualizar", help="Vuelve a leer el archivo opiniones.json desde disco", use_container_width=True):
+                st.rerun()
+
         # Aplicar filtros
         opiniones_filtradas = consultar_opiniones(
             registros=todas_opiniones,
@@ -301,11 +307,18 @@ def main():
             sentimiento=sentimiento_filtro,
         )
 
+        # Ordenar por defecto de más reciente a más antigua para que las nuevas aparezcan arriba
+        opiniones_a_mostrar = sorted(
+            opiniones_filtradas,
+            key=lambda x: str(x.get("fecha_utc", "")),
+            reverse=True,
+        )
+
         # Métricas resumidas
         metricas = obtener_metricas(opiniones_filtradas)
 
         m_col0, m_col1, m_col2, m_col3, m_col4 = st.columns(5)
-        m_col0.metric("Total filtradas", metricas["total"])
+        m_col0.metric("Total registradas", metricas["total"])
         m_col1.metric("🟢 Positivas", metricas["positivo"])
         m_col2.metric("🔴 Negativas", metricas["negativo"])
         m_col3.metric("⚪ Neutras", metricas["neutro"])
@@ -314,12 +327,13 @@ def main():
         st.divider()
 
         # Visualización de resultados
-        if not opiniones_filtradas:
+        if not opiniones_a_mostrar:
             st.info("ℹ️ No se encontraron opiniones registradas con los filtros seleccionados.")
         else:
+            st.caption(f"Mostrando **{len(opiniones_a_mostrar)}** opiniones (ordenadas de más reciente a más antigua):")
             # Preparar datos formateados para st.dataframe
             tabla_datos = []
-            for op in opiniones_filtradas:
+            for op in opiniones_a_mostrar:
                 tabla_datos.append({
                     "Fecha (UTC)": op.get("fecha_utc", "")[:19].replace("T", " "),
                     "Jugador": op.get("jugador_nombre", ""),
@@ -333,6 +347,7 @@ def main():
                 tabla_datos,
                 use_container_width=True,
                 hide_index=True,
+                height=450,
             )
 
             # Botón para descargar resultados filtrados en JSON (Actividad 6)

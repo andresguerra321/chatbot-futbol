@@ -11,7 +11,7 @@ import os
 import re
 from typing import Any, Literal
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from langchain_core.prompts import ChatPromptTemplate
 
 load_dotenv(override=True)
@@ -24,6 +24,8 @@ class AnalisisOpinion(BaseModel):
     Contrato estricto de salida para el análisis de la opinión.
     Cumple con los requisitos de la Actividad 4 y protege contra fallos de longitud.
     """
+    model_config = ConfigDict(extra="allow")
+
     es_pertinente: bool = Field(
         description="Indica si el texto constituye una opinión sobre el jugador seleccionado"
     )
@@ -228,16 +230,37 @@ def analizar_opinion(
 
     # Intento 1: Salida estructurada nativa de LangChain (with_structured_output)
     try:
-        modelo_estructurado = llm.with_structured_output(AnalisisOpinion)
+        modelo_estructurado = llm.with_structured_output(AnalisisOpinion, include_raw=True)
         cadena = PROMPT_ANALISIS | modelo_estructurado
-        resultado = cadena.invoke({
+        resultado_dict = cadena.invoke({
             "jugador": nombre_jugador,
             "opinion": texto_limpio
         })
-        if isinstance(resultado, AnalisisOpinion):
-            return resultado, nombre_modelo
-        if isinstance(resultado, dict):
-            return AnalisisOpinion(**resultado), nombre_modelo
+
+        parsed = resultado_dict.get("parsed") if isinstance(resultado_dict, dict) else resultado_dict
+        raw_msg = resultado_dict.get("raw") if isinstance(resultado_dict, dict) else None
+
+        # Extraer métricas de tokens si están disponibles
+        tokens_info = None
+        if raw_msg is not None:
+            usage = getattr(raw_msg, "usage_metadata", None) or getattr(raw_msg, "response_metadata", {}).get("token_usage", {})
+            if usage:
+                prompt_tokens = usage.get("input_tokens", usage.get("prompt_tokens", 0))
+                completion_tokens = usage.get("output_tokens", usage.get("completion_tokens", 0))
+                total_tokens = usage.get("total_tokens", prompt_tokens + completion_tokens)
+                tokens_info = {
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": total_tokens,
+                }
+
+        if isinstance(parsed, AnalisisOpinion):
+            parsed.tokens_info = tokens_info
+            return parsed, nombre_modelo
+        if isinstance(parsed, dict):
+            obj = AnalisisOpinion(**parsed)
+            obj.tokens_info = tokens_info
+            return obj, nombre_modelo
     except Exception as exc_primaria:
         # Mecanismo de contingencia para modelos que tengan problemas con tool-calling de Groq:
         # Se solicita JSON explícito y se parsea limpiamente

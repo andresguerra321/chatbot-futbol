@@ -153,10 +153,22 @@ def main():
                         badge = BADGES_SENTIMIENTO.get(msg.get("sentimiento"), "⚪")
                         st.markdown(f"**Clasificación:** {badge}")
                         st.markdown(f"**Razón:** {msg.get('razon')}")
+                        if msg.get("tokens_info"):
+                            t_inf = msg["tokens_info"]
+                            st.caption(
+                                f"🔢 **Tokens consumidos:** {t_inf.get('total_tokens', 0)} "
+                                f"({t_inf.get('prompt_tokens', 0)} entrada · {t_inf.get('completion_tokens', 0)} salida)"
+                            )
                         if msg.get("guardado"):
                             st.caption(f"💾 *Guardado en disco con ID: `{msg.get('registro_id', '')[:8]}...`*")
                     else:
                         st.warning(f"⚠️ **Mensaje no pertinente:** {msg.get('razon')}")
+                        if msg.get("tokens_info"):
+                            t_inf = msg["tokens_info"]
+                            st.caption(
+                                f"🔢 **Tokens consumidos:** {t_inf.get('total_tokens', 0)} "
+                                f"({t_inf.get('prompt_tokens', 0)} entrada · {t_inf.get('completion_tokens', 0)} salida)"
+                            )
                         st.caption("ℹ️ *Esta opinión no fue guardada en el catálogo porque no corresponde al jugador.*")
 
         # Captura de nueva opinión
@@ -210,9 +222,16 @@ def main():
                             st.info("💡 Tu mensaje se conserva en pantalla para que no lo pierdas.")
                             return
 
+                        info_tokens = getattr(analisis, "tokens_info", None)
+
                         # 3. Procesar resultado
                         if not analisis.es_pertinente:
                             st.warning(f"⚠️ **Mensaje no pertinente:** {analisis.razon}")
+                            if info_tokens:
+                                st.caption(
+                                    f"🔢 **Tokens consumidos:** {info_tokens.get('total_tokens', 0)} "
+                                    f"({info_tokens.get('prompt_tokens', 0)} entrada · {info_tokens.get('completion_tokens', 0)} salida)"
+                                )
                             st.caption("ℹ️ No se guardó en el archivo JSON por no referirse al jugador seleccionado.")
 
                             st.session_state.mensajes_chat.append({
@@ -220,12 +239,18 @@ def main():
                                 "es_pertinente": False,
                                 "sentimiento": None,
                                 "razon": analisis.razon,
+                                "tokens_info": info_tokens,
                                 "guardado": False,
                             })
                         else:
                             badge = BADGES_SENTIMIENTO.get(analisis.sentimiento, "⚪ Neutro")
                             st.markdown(f"**Clasificación:** {badge}")
                             st.markdown(f"**Razón:** {analisis.razon}")
+                            if info_tokens:
+                                st.caption(
+                                    f"🔢 **Tokens consumidos:** {info_tokens.get('total_tokens', 0)} "
+                                    f"({info_tokens.get('prompt_tokens', 0)} entrada · {info_tokens.get('completion_tokens', 0)} salida)"
+                                )
 
                             # 4. Guardar en disco mediante persistencia atómica
                             try:
@@ -247,6 +272,7 @@ def main():
                                     "es_pertinente": True,
                                     "sentimiento": analisis.sentimiento,
                                     "razon": analisis.razon,
+                                    "tokens_info": info_tokens,
                                     "guardado": exito,
                                     "registro_id": registro["id"],
                                 })
@@ -340,6 +366,7 @@ def main():
                     "Sentimiento": BADGES_SENTIMIENTO.get(op.get("sentimiento"), op.get("sentimiento")),
                     "Opinión original": op.get("opinion_original", ""),
                     "Justificación": op.get("razon", ""),
+                    "Tokens": op.get("tokens_usados", {}).get("total_tokens", "N/D"),
                     "Modelo": op.get("modelo", ""),
                 })
 

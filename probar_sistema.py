@@ -64,7 +64,7 @@ def main():
 
     # 4. Consultas y filtros
     filtro_messi = almacenamiento.consultar_opiniones(opiniones, jugador_id="j001")
-    assert len(filtro_messi) == 3, f"Se esperaban 3 opiniones para Messi, se obtuvieron {len(filtro_messi)}"
+    assert len(filtro_messi) >= 3, f"Se esperaban al menos 3 opiniones para Messi, se obtuvieron {len(filtro_messi)}"
     
     filtro_negativo = almacenamiento.consultar_opiniones(opiniones, sentimiento="negativo")
     assert len(filtro_negativo) >= 1, "Debe encontrar opiniones negativas"

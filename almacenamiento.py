@@ -110,6 +110,7 @@ def crear_registro(
     """
     sentimiento = getattr(analisis, "sentimiento", None)
     razon = getattr(analisis, "razon", "")
+    tokens_info = getattr(analisis, "tokens_info", None)
 
     registro = {
         "id": str(uuid4()),
@@ -122,6 +123,8 @@ def crear_registro(
         "modelo": modelo,
         "version_prompt": version_prompt,
     }
+    if tokens_info:
+        registro["tokens_usados"] = tokens_info
     return registro
 
 
